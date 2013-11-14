@@ -1,0 +1,47 @@
+extends layout
+
+block content
+    div.container
+        div.row
+            div.span12.alert.alert-info
+                h1= title
+                p Welcome to #{title}
+            div.span12.alert  
+                    div.row
+                        
+                        if(typeof(item) !== 'undefined')
+                            form( action="/update/#{item._id}" method="post" accept-charset="utf-8")
+                                    if item._id == current 
+                                        p.span12  Edit Item
+                                        ul.nav.span2
+                                            li
+                                                if item.name == ''
+                                                    input.span2(type="text" name="name" placeholder="Name")
+                                                else 
+                                                   input.span2(type="text" name="name" value="#{item.name}")
+                                            li
+                                                if item.stock == ''
+                                                    input.span2(type="text" name="stock" placeholder="Stock Units")
+                                                else 
+                                                   input.span2(type="text" name="stock" value="#{item.stock}")
+                                            li
+                                                if item.part_number == ''
+                                                    input.span2(type="text" name="part_number" placeholder="Part_Number")
+                                                else 
+                                                   input.span2(type="text" name="part_number" value="#{item.part_number}")
+                                        ul.nav.span4
+                                            li
+                                                if item.description == ''
+                                                    input.span4(type="text" name="description" placeholder="Description")
+                                                else 
+                                                   input.span4(type="text" name="description" value="#{item.description}")
+                                            li    
+                                                if item.vendor == ''
+                                                    input.span2(type="text" name="vendor" placeholder="Vendor")
+                                                else 
+                                                   input.span2(type="text" name="vendor" value="#{item.vendor}") 
+                                            li    
+                                                button.btn.btn-success.pull-left(type="submit" name="Add new item") Save
+                               
+    
+            

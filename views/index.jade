@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    div.container
+        div.row
+            div.span12.alert.alert-info
+                h1= title
+                p Welcome to #{title}
+            div.span12.alert  
+                form( action="/create" method="post" accept-charset="utf-8")
+                    div.row
+                        ul.nav.span2
+                            li
+                                input.span2(type="text" name="name" placeholder="name") 
+                            li
+                                input.span2(type="text" name="stock" placeholder="stock") 
+                            li
+                                input.span2(type="text" name="part_number" placeholder="part_number") 
+                        ul.nav.span4
+                            li
+                                input.span4(type="text" name="description" placeholder="description") 
+                            li    
+                                input.span2(type="text" name="vendor" placeholder="vendor") 
+                            li    
+                                button.btn.btn-primary.pull-left(type="submit" name="Add new item") Add New Item
+                form(action="/" method="post" accept-charset="utf-8")
+                    input.span3(type="text" name="search" placeholder="search")
+            
+            div.span12
+                table.table
+                    if(typeof(items) !== 'undefined')
+                        each item, count in items
+                            tr
+                                td
+                                    span.badge=count
+                                td=item.name 
+                                td=item.stock
+                                td=item.description
+                                td=item.part_number
+                                td=item.vendor
+                                td 
+                                    a( href="/edit/#{item._id}") Update
+                                td 
+                                    a(class="close" href="/destroy/#{item._id}") &times
