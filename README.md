@@ -11,5 +11,9 @@ Once an item is created you can edit or delete it.
 TODO
 ====
    * Improve search engine with a live search.
-   * Make a item page with more info and images of the item.
+   * Improve search to look in all fields and look into substrings of the fields.
+   * Improve item page.
+   * When an item is created searching for another item with the same name and merge/alert.
+
+
    
