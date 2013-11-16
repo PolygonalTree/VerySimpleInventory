@@ -20,7 +20,6 @@ exports.index = function (req, res) {
             });
         });
     }else{
-        console.log("por el forro");
         Item.find(function(err,items, count){
             if( err ) return next( err );
             res.render('index', { 
@@ -35,12 +34,16 @@ exports.index = function (req, res) {
 exports.create = function (req, res){
     new Item({
         name        : req.body.name,
+        stock       : req.body.stock,
         part_number : req.body.part_number,
         description : req.body.description,
+        location    : req.body.location,
+        datasheet   : req.body.datasheet,
         vendor      : req.body.vendor,
         updated_at  : Date.now()
     }).save(function(err, item, count){
         if( err ) return next( err );
+        console.log(Item.datasheet);
         res.redirect('/')
     });
 };
@@ -66,12 +69,25 @@ exports.edit = function (req, res){
     });
 };
 
+exports.view = function (req, res){
+    Item.findOne({_id:req.params.id},function(err,item){
+        if( err ) return next( err );
+        res.render('view',{
+            title : 'Simple Inventory',
+            item : item,
+            current: req.params.id
+        });
+    });
+};
+
 exports.update = function(req,res){
     Item.findById(req.params.id, function(err,item){
         if( err ) return next( err );
         item.name = req.body.name;
-        item.description = req.body.description;
         item.stock = req.body.stock;
+        item.description = req.body.description;
+        item.location = req.body.location;
+        item.datasheet = req.body.datasheet;
         item.part_number = req.body.part_number;
         item.vendor = req.body.vendor;
         item.updated_at = Date.now();

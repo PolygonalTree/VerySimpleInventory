@@ -11,17 +11,21 @@ block content
                     div.row
                         ul.nav.span2
                             li
-                                input.span2(type="text" name="name" placeholder="name") 
+                                input.span2(type="text" name="name" placeholder="Name") 
                             li
-                                input.span2(type="text" name="stock" placeholder="stock") 
+                                input.span2(type="text" name="stock" placeholder="Stock") 
                             li
-                                input.span2(type="text" name="part_number" placeholder="part_number") 
+                                input.span2(type="text" name="location" placeholder="Location")
+                            li
+                                input.span2(type="text" name="part_number" placeholder="Part_number")
                         ul.nav.span4
                             li
-                                input.span4(type="text" name="description" placeholder="description") 
+                                input.span4(type="text" name="description" placeholder="Description") 
+                            li
+                                input.span4(type="text" name="datasheet" placeholder="Datasheet Link")
                             li    
-                                input.span2(type="text" name="vendor" placeholder="vendor") 
-                            li    
+                                input.span2(type="text" name="vendor" placeholder="Vendor")  
+                            li
                                 button.btn.btn-primary.pull-left(type="submit" name="Add new item") Add New Item
                 form(action="/" method="post" accept-charset="utf-8")
                     input.span3(type="text" name="search" placeholder="search")
@@ -36,8 +40,13 @@ block content
                                 td=item.name 
                                 td=item.stock
                                 td=item.description
+                                td
+                                    a(href="#{item.datasheet}" target="_blank") Datasheet
                                 td=item.part_number
                                 td=item.vendor
+                                
+                                td
+                                    a( href="/view/#{item._id}") View
                                 td 
                                     a( href="/edit/#{item._id}") Update
                                 td 

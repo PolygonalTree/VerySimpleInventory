@@ -6,6 +6,8 @@ var Item = new Schema({
     stock       : Number,
     part_number : String,
     description : String,
+    location    : String,
+    datasheet   : String,
     vendor      : String,
     updated_at  : Date
 

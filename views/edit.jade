@@ -15,28 +15,38 @@ block content
                                         p.span12  Edit Item
                                         ul.nav.span2
                                             li
-                                                if item.name == ''
+                                                if item.name == '' || item.name == undefined
                                                     input.span2(type="text" name="name" placeholder="Name")
                                                 else 
                                                    input.span2(type="text" name="name" value="#{item.name}")
                                             li
-                                                if item.stock == ''
+                                                if item.stock == '' || item.stock == undefined
                                                     input.span2(type="text" name="stock" placeholder="Stock Units")
                                                 else 
                                                    input.span2(type="text" name="stock" value="#{item.stock}")
                                             li
-                                                if item.part_number == ''
+                                                if item.location == '' || item.location == undefined
+                                                    input.span2(type="text" name="location" placeholder="Location")
+                                                else 
+                                                   input.span2(type="text" name="stock" value="#{item.stock}")
+                                            li
+                                                if item.part_number == '' || item.part_number == undefined
                                                     input.span2(type="text" name="part_number" placeholder="Part_Number")
                                                 else 
                                                    input.span2(type="text" name="part_number" value="#{item.part_number}")
                                         ul.nav.span4
                                             li
-                                                if item.description == ''
+                                                if item.description == '' || item.description == undefined
                                                     input.span4(type="text" name="description" placeholder="Description")
                                                 else 
                                                    input.span4(type="text" name="description" value="#{item.description}")
+                                            li
+                                                if item.datasheet == '' || item.datasheet == undefined
+                                                    input.span4(type="text" name="datasheet" placeholder="Datasheet link")
+                                                else 
+                                                   input.span4(type="text" name="datasheet" value="#{item.datasheet}")
                                             li    
-                                                if item.vendor == ''
+                                                if item.vendor == '' || item.vendor == undefined
                                                     input.span2(type="text" name="vendor" placeholder="Vendor")
                                                 else 
                                                    input.span2(type="text" name="vendor" value="#{item.vendor}") 

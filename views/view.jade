@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    div.container
+        div.row
+            div.span12.alert.alert-info
+                h1= title
+                p Welcome to #{title}
+            div.span12  
+                    h3.span6 #{item.name}
+                    ul.nav.span6
+                        li
+                            p stock: #{item.stock}
+                        li
+                            p Description: #{item.description}
+                            
+                        li
+                            p Datasheet: 
+                                a(href="#{item.datasheet}" target="_blank") Link
+                            p Location: #{item.location}
+                        li
+                            p Part_Number: #{item.part_number}
+                        li  
+                            P Vendor: #{item.vendor}
+                            
+                    div.span6
+                        //img(src=#{item.imageSrc})
+                        
+                                   
