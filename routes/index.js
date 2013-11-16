@@ -7,12 +7,17 @@ var Item = mongoose.model('Item');
 
 exports.index = function (req, res) {
     console.log(req.body.search);
-    if(req.body.search !=='' && typeof(req.body.search)!=='undefined'){
-        var query = Item.find({$or:[{ 'description': req.body.search },{ 'name': req.body.search }]});
+    if(req.body.search !='' && typeof(req.body.search)!='undefined'){
+//        var query = Item.find({$or:[{ 'description': req.body.search },{ 'name': req.body.search }]}).$where('name').$regex(req.body.search+"/i");
+        //var query = Item.find({'name': {$in: ["/^"+req.body.search+"/i"]}})
+        var query = Item.find({$or:[{'name':{ $regex: req.body.search, $options: 'i' } },{'description':{$regex: req.body.search, $options: 'i' } }]});
+        //query.regex('description', req.body.search+"/i");
+        //query.regex('name', req.body.search+"/i");
         query.exec(function(err, items){
             if( err ) return next( err );
             console.log(items);
             console.log(items.length);
+            //res.send({items: items});
             res.render('index', { 
                 title : 'Simple Inventory',
                 items : items,

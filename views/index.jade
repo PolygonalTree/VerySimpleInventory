@@ -8,38 +8,52 @@ block content
                 p Welcome to #{title}
             div.span12.alert  
                 form( action="/create" method="post" accept-charset="utf-8")
-                    div.row
-                        ul.nav.span2
-                            li
-                                input.span2(type="text" name="name" placeholder="Name") 
-                            li
-                                input.span2(type="text" name="stock" placeholder="Stock") 
-                            li
-                                input.span2(type="text" name="location" placeholder="Location")
-                            li
-                                input.span2(type="text" name="part_number" placeholder="Part_number")
-                        ul.nav.span4
-                            li
-                                input.span4(type="text" name="description" placeholder="Description") 
-                            li
-                                input.span4(type="text" name="datasheet" placeholder="Datasheet Link")
-                            li    
-                                input.span2(type="text" name="vendor" placeholder="Vendor")  
-                            li
-                                button.btn.btn-primary.pull-left(type="submit" name="Add new item") Add New Item
+                    //div.row
+                    ul.unstyled.span2
+                        li
+                            input.span2(type="text" name="name" placeholder="Name") 
+                        li
+                            input.span2(type="text" name="stock" placeholder="Stock") 
+                        li
+                            input.span2(type="text" name="location" placeholder="Location")
+                        li
+                            input.span2(type="text" name="part_number" placeholder="Part_number")
+                    ul.nav.span4
+                        li
+                            input.span4(type="text" name="description" placeholder="Description") 
+                        li
+                            input.span4(type="text" name="datasheet" placeholder="Datasheet Link")
+                        li    
+                            input.span2(type="text" name="vendor" placeholder="Vendor")  
+                        li
+                            button.btn.btn-primary.pull-left(type="submit" name="Add new item") Add New Item
+            div.span12.alert.alert-success
                 form(action="/" method="post" accept-charset="utf-8")
-                    input.span3(type="text" name="search" placeholder="search")
+                    input#search.span3(type="text" name="search" placeholder="search")
             
-            div.span12
-                table.table
+            div#inventoryItems.span12
+                table#searchResult.table
+                    tr
+                        th #
+                        th Name
+                        th Stock
+                        th Description
+                        th Datasheet
+                        th Part_Number
+                        th Vendor
+                        th Details
+                        th Update
+                        th Delete
+                        
                     if(typeof(items) !== 'undefined')
                         each item, count in items
+                            
                             tr
                                 td
                                     span.badge=count
                                 td=item.name 
                                 td=item.stock
-                                td=item.description
+                                td=item.description.substring(0,140)
                                 td
                                     a(href="#{item.datasheet}" target="_blank") Datasheet
                                 td=item.part_number
@@ -51,3 +65,21 @@ block content
                                     a( href="/edit/#{item._id}") Update
                                 td 
                                     a(class="close" href="/destroy/#{item._id}") &times
+            script(type='text/javascript').
+                $(document).ready(function() {
+                    var timer;
+                    $("#search").keyup(function() {
+                        clearTimeout(timer);
+                        var ms = 200; // milliseconds
+                        var val = this.value;
+                        timer = setTimeout(function() {                          
+                            if(val.length != 0) {
+                                $("#inventoryItems").load("/ #searchResult",{"search": val});
+                                    //$.post("/", , function(data){
+                                        
+                                   // });
+                            };
+                        }, ms);
+                    });
+                });
+                
